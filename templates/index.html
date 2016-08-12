@@ -1,0 +1,15 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+<form method='POST' action='/oauth2callback'>
+
+	<input type="text" name="username">
+	<input type="text" name="password">
+
+	<input type="submit" value="Log In">
+	login page
+
+
+</form>
+
+{% endblock %}
