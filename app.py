@@ -8,11 +8,14 @@ from flask_googlelogin import GoogleLogin
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 
+#Configure SQLAlchemy Database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 #mongo = PyMongo(app)
 
+
+#Configure Google Login API
 googlelogin = GoogleLogin(app)
 
 from flask_login import LoginManager
@@ -20,11 +23,16 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 googlelogin = GoogleLogin(app, login_manager)
 
+
+
+#Index Page
 @app.route('/', methods=['GET'])
 def index():
 	return render_template("index.html")
 
-@app.route('/oauth2callback', methods=['POST'])
+
+#Copied from Flask-Google Tutorial
+@app.route('/oauth2callback')
 @googlelogin.oauth2callback
 def create_or_update_user(token, userinfo, **params):
     user = User.filter_by(google_id=userinfo['id']).first()
