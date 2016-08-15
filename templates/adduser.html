@@ -1,0 +1,63 @@
+{% extends "layout/main.html" %}
+{% block body %}
+<br>
+<br>
+
+<h1>Add User</h1>
+<form method='POST' action='/newuser'>
+
+	Username: <input type="text" name="username">
+	<br>
+	<br>
+	Password: <input type="text" name="password">
+	<br>
+	<br>
+	Email: <input type="text" name="email">
+	<br>
+	<br>
+	Group: <input type="text" name ="group"
+	<br>
+	<br>
+	<input type="submit" value="Add User">
+
+
+</form>
+<br>
+<br>
+<br>
+<br>
+
+
+<h1>Add Queen</h1>
+<form method='POST' action='/newqueen'>
+
+	Name: <input type="text" name="name">
+	<br>
+	<br>
+	Image: <input type="text" name="img">
+	<br>
+	<br>
+	Description: <textarea name="description"></textarea>
+	<br>
+	<br>
+	<br>
+	<input type="submit" value="Add Queen">
+
+
+</form>
+
+{% for u in users %}
+<br>
+<h2>{{u.username}}</h2>
+<br>
+Email: {{u.email}}
+<br>
+Group: {{u.group}}
+<br>
+Points: {{u.points}}
+<br>
+<a href="/clear/{{u.id}}">Delete User</a>
+{%endfor%}
+<br>
+
+{% endblock %}

@@ -1,7 +1,15 @@
 {% extends "layout/main.html" %}
-
+<br>
+<br>
+{% for u in users %}
+<br>
+u.username
+u.email
+u.group
+u.points
+<br>
+{%endfor%}
 {% block body %}
-
 <form method='POST' action='/oauth2callback'>
 
 	<input type="text" name="username">
@@ -12,22 +20,5 @@
 
 
 </form>
-<br>
-<br>
-{% for q in queens %}
-<br>
-<h1>{{q.name}}</h1>
-<br>
-<img src="{{q.img}}"width=300/>
-<br>
-<br>
-{{q.description}}
-<br>
-<br>
-POINTS: {{q.points}}
-<br>
-{%endfor%}
-
-
 
 {% endblock %}
