@@ -8,9 +8,25 @@
 {% for q in queens %}
 
 <h2>{{q.name}}</h2>
-<a href='/duplicate/{{q.id}}'>CLONE THIS QUEEN</a>
+<img src="{{q.img}}" width=150>
 <br>
+Drafted : {{q.drafted}}
+{% if q.drafted == 1 %}
+	
+		Owner: {{q.owners.username}}
+	
+{%endif%}
 <br>
+<a href="/clearowner/{{q.id}}">Clear Owner</a>
+
+{% else %}
+<form method="POST" action="/addowner/{{q.id}}">
+FREE AGENT! New Owner: <input type="text" name="owner">
+</form>
+{%endif%}
+<a href="/delete/{{q.id}}">Delete Queen</a>
+<!--<a href='/duplicate/{{q.id}}'>CLONE THIS QUEEN</a>-->
+
 
 
 

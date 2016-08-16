@@ -56,6 +56,11 @@ Group: {{u.group}}
 <br>
 Points: {{u.points}}
 <br>
+Queens: 
+{% for q in u.queens %}
+{{q.name}}
+{%endfor%}
+<br>
 <a href="/clear/{{u.id}}">Delete User</a>
 {%endfor%}
 <br>

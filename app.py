@@ -91,6 +91,31 @@ def adduser():
 
 	return render_template("adduser.html", **templateData)
 
+#Add Owner to Queen
+@app.route('/addowner/<id>', methods=['GET', 'POST'])
+def addowner(id):
+
+	
+	queen = Queen.query.filter_by(id=id).first()
+	queen.drafted = True
+
+	user = User.query.filter_by(username=request.form.get('owner')).first()
+
+	user.queens.append(queen)
+	
+	return redirect('/queens')
+
+
+#Remove Owner
+@app.route('/clearowner/<id>', methods=['GET', 'POST'])
+def removeowner(id):
+	queen = Queen.query.filter_by(id=id).first()
+	queen.drafted = False
+
+	queen.owners = ''
+
+	return redirect('/queens')
+
 
 #CLONE A QUEEN
 @app.route('/duplicate/<id>')
@@ -98,6 +123,8 @@ def duplicate(id):
 	
 	
 	queen = Queen.query.filter_by(id=id).first()
+
+	
 
 	n = queen.name
 	d = queen.description
@@ -110,6 +137,9 @@ def duplicate(id):
 	db.session.commit()
 
 	return redirect('/queens')
+
+
+
 
 
 #Post new User data
@@ -183,6 +213,18 @@ def clearone(id):
 
 
 	return redirect('/adduser')
+
+#Delete Queen
+@app.route('/delete/<id>')
+def deleteone(id):
+
+	
+	queen = Queen.query.filter_by(id=id).first()
+	db.session.delete(queen)
+	db.session.commit()
+
+
+	return redirect('/queens')
  
  
 def main():
