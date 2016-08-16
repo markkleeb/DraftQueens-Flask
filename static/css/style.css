@@ -3,3 +3,11 @@ body{
 	background: white;
 
 }
+
+.group{
+
+
+	float:left;
+	margin: 10px 20px;
+	text-align: right;
+}
