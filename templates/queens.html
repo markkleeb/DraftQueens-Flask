@@ -1,0 +1,19 @@
+{% extends "layout/main.html" %}
+
+{% block body %}
+
+
+<a href="http://www.logotv.com/shows/rupauls-all-stars-drag-race/cast#e359abf0-0269-4a33-85df-674944bfc574">Queens on RuPaul's Site</a>
+
+{% for q in queens %}
+
+<h2>{{q.name}}</h2>
+<a href='/duplicate/{{q.id}}'>CLONE THIS QUEEN</a>
+<br>
+<br>
+
+
+
+{%endfor%}
+
+{% endblock %}

@@ -3,19 +3,23 @@ from flask_sqlalchemy import SQLAlchemy
 from flask.ext.wtf import Form
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test2.db'
 db = SQLAlchemy(app)
 
+
+queens = db.Table('queens', 
+	db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+	db.Column('queen_id', db.Integer, db.ForeignKey('queen.id')))
 
 class User(db.Model):
 
 	id = db.Column(db.Integer, primary_key=True)
-	username = db.Column(db.String(80), unique=True)
-	password = db.Column(db.String(80), unique=True)
-	email = db.Column(db.String(120), unique=True)
+	username = db.Column(db.String(80))
+	password = db.Column(db.String(80))
+	email = db.Column(db.String(120))
 	group = db.Column(db.Integer)
 	points = db.Column(db.Integer)
-	#queen1 = db.relationship('Queen', backref=db.backref('owners', lazy='dynamic'))
+	queens = db.relationship('Queen', secondary=queens, backref=db.backref('owners', lazy='dynamic'))
 	#queen2 = db.relationship('Queen', backref=db.backref('owners', lazy='dynamic'))
 	#queen3 = db.relationship('Queen', backref=db.backref('owners', lazy='dynamic'))
 

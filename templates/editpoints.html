@@ -2,16 +2,7 @@
 
 {% block body %}
 
-<form method='POST' action='/oauth2callback'>
 
-	<input type="text" name="username">
-	<input type="text" name="password">
-
-	<input type="submit" value="Log In">
-	login page
-
-
-</form>
 <h1>Scoreboard</h1>
 
 <br>
@@ -21,6 +12,11 @@
 {% if u.group == 1 %}
 <h3>{{u.username}} - {{u.points}} </h3>
 <br>
+<form method='POST' action="/changepoints/{{u.id}}">
+ENTER NEW POINTS: <input type="text" name="points">
+<br>
+<input type="submit" value="Enter">
+</form>
 {%endif%}
 {%endfor%}
 <br>
@@ -31,6 +27,11 @@
 {% if u.group == 2 %}
 <h3>{{u.username}} - {{u.points}} </h3>
 <br>
+<form method='POST' action="/changepoints/{{u.id}}">
+ENTER NEW POINTS: <input type="text" name="points">
+<br>
+<input type="submit" value="Enter">
+</form>
 {%endif%}
 {%endfor%}
 <br>
@@ -41,6 +42,11 @@
 {% if u.group == 3 %}
 <h3>{{u.username}} - {{u.points}}</h3>
 <br>
+<form method='POST' action="/changepoints/{{u.id}}">
+ENTER NEW POINTS: <input type="text" name="points">
+<br>
+<input type="submit" value="Enter">
+</form>
 {%endif%}
 {%endfor%}
 <br>
@@ -51,6 +57,11 @@
 {% if u.group == 4 %}
 <h3>{{u.username}} - {{u.points}}</h3>
 <br>
+<form method='POST' action="/changepoints/{{u.id}}">
+ENTER NEW POINTS: <input type="text" name="points">
+<br>
+<input type="submit" value="Enter">
+</form>
 {%endif%}
 {%endfor%}
 <br>

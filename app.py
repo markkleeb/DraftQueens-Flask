@@ -26,7 +26,7 @@ db.create_all()
 #Index Page (not yet set up)
 @app.route('/')
 def index():
-   users = User.query.all()
+   users = User.query.order_by(User.group).order_by(User.points)
    queens = Queen.query.order_by(Queen.name)
 
    templateData= {
@@ -36,7 +36,44 @@ def index():
    return render_template("index.html", **templateData)
  
 
- 
+@app.route('/queens')
+def queens():
+
+	queens = Queen.query.order_by(Queen.name)
+
+	templateData = {
+	'queens' : queens
+	}
+
+	return render_template("queens.html", **templateData)
+
+
+@app.route('/admin')
+def editpoints():
+
+	users = User.query.order_by(User.group).order_by(User.points)
+
+
+	templateData = {
+
+	'users' : users,
+
+	}
+
+	return render_template("editpoints.html", **templateData)
+
+@app.route('/changepoints/<id>', methods=['POST'])
+def changepoints(id):
+
+	user = User.query.filter_by(id=id).first()
+
+	points = request.form.get('points')
+
+	user.points = points
+
+	return redirect('/')
+
+
 
 #Form to add new users and queens
 @app.route('/adduser')
@@ -53,6 +90,26 @@ def adduser():
 	}
 
 	return render_template("adduser.html", **templateData)
+
+
+#CLONE A QUEEN
+@app.route('/duplicate/<id>')
+def duplicate(id):
+	
+	
+	queen = Queen.query.filter_by(id=id).first()
+
+	n = queen.name
+	d = queen.description
+	i = queen.img
+	k = queen.kickedoff
+	p = queen.points
+
+	new = Queen(n, i, d, 0, p, 0, k)
+	db.session.add(new)
+	db.session.commit()
+
+	return redirect('/queens')
 
 
 #Post new User data
@@ -113,6 +170,8 @@ def clearall():
 
 
 
+
+
 #Clear specific User
 @app.route('/clear/<id>')
 def clearone(id):
@@ -123,7 +182,7 @@ def clearone(id):
 	db.session.commit()
 
 
-	return redirect('/')
+	return redirect('/adduser')
  
  
 def main():
