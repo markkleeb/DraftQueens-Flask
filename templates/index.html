@@ -56,7 +56,26 @@
 <br>
 <br>
 <br>
-
+<h2>Group 5</h2>
+{% for u in users %}
+{% if u.group == 5 %}
+<h3>{{u.username}} - {{u.points}}</h3>
+<br>
+{%endif%}
+{%endfor%}
+<br>
+<br>
+<br>
+<h2>Group 6</h2>
+{% for u in users %}
+{% if u.group == 6 %}
+<h3>{{u.username}} - {{u.points}}</h3>
+<br>
+{%endif%}
+{%endfor%}
+<br>
+<br>
+<br>
 
 
 

@@ -11,11 +11,17 @@
 <img src="{{q.img}}" width=150>
 <br>
 Drafted : {{q.drafted}}
+
+<!--This is broken somewhere around here -->
+
 {% if q.drafted == 1 %}
 	
 		Owner: {{q.owners.username}}
 	
 {%endif%}
+
+<!-- Broken something above this line -->
+
 <br>
 <a href="/clearowner/{{q.id}}">Clear Owner</a>
 
