@@ -1,27 +1,17 @@
-{% extends "layout/main.html" %}
+{% extends "layout/admin.html" %}
 
 {% block body %}
 
-
-<a href="http://www.logotv.com/shows/rupauls-all-stars-drag-race/cast#e359abf0-0269-4a33-85df-674944bfc574">Queens on RuPaul's Site</a>
 
 {% for q in queens %}
 
 <h2>{{q.name}}</h2>
 <img src="{{q.img}}" width=150>
 <br>
-Drafted : {{q.drafted}}
-
-<!--This is broken somewhere around here -->
-
 {% if q.drafted == 1 %}
-	
-		Owner: {{q.owners.username}}
-	
-{%endif%}
-
-<!-- Broken something above this line -->
-
+	{% for o in q.owners %}
+	Owner: {{o.username}}
+	{%endfor%}
 <br>
 <a href="/clearowner/{{q.id}}">Clear Owner</a>
 
@@ -29,11 +19,9 @@ Drafted : {{q.drafted}}
 <form method="POST" action="/addowner/{{q.id}}">
 FREE AGENT! New Owner: <input type="text" name="owner">
 </form>
-{%endif%}
+{% endif%}
 <a href="/delete/{{q.id}}">Delete Queen</a>
 <!--<a href='/duplicate/{{q.id}}'>CLONE THIS QUEEN</a>-->
-
-
 
 
 {%endfor%}

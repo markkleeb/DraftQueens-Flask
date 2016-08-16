@@ -1,0 +1,23 @@
+<html>
+
+<head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+
+<body>
+
+<h1>DRAFT QUEENS</h1>
+<br>
+<a href="/admin">Edit Points</a>
+<br>
+<a href="/queens">Edit Queens</a>
+<br>
+<a href="/adduser">Add new users/queens</a>
+<br>
+
+{% block body %}{% endblock %}
+
+</body>
+
+
+</html>

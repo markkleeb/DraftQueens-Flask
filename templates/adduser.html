@@ -1,4 +1,4 @@
-{% extends "layout/main.html" %}
+{% extends "layout/admin.html" %}
 {% block body %}
 <br>
 <br>
@@ -23,9 +23,6 @@
 
 </form>
 <br>
-<br>
-<br>
-<br>
 
 
 <h1>Add Queen</h1>
@@ -49,19 +46,21 @@
 {% for u in users %}
 <br>
 <h2>{{u.username}}</h2>
+<b>Email:</b> {{u.email}}
 <br>
-Email: {{u.email}}
+<b>Group:</b> {{u.group}}
 <br>
-Group: {{u.group}}
+<b>Points:</b> {{u.points}}
 <br>
-Points: {{u.points}}
-<br>
-Queens: 
+<b>Queens:</b> 
 {% for q in u.queens %}
-{{q.name}}
+- {{q.name}} 
 {%endfor%}
 <br>
+<a href="/edituser/{{u.id}}">Edit User</a>
+<br>
 <a href="/clear/{{u.id}}">Delete User</a>
+<br>
 {%endfor%}
 <br>
 

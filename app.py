@@ -21,9 +21,9 @@ oauth = OAuth()
 db.create_all()
 #mongo = PyMongo(app)
 
+#----------------GET ROUTES ----------------#####
 
-
-#Index Page (not yet set up)
+#Index Page (not yet set up) - Scoreboard
 @app.route('/')
 def index():
    users = User.query.order_by(User.group).order_by(User.points)
@@ -35,6 +35,8 @@ def index():
    }
    return render_template("index.html", **templateData)
  
+
+#List of 180 queens and all options for queens
 
 @app.route('/queens')
 def queens():
@@ -48,31 +50,23 @@ def queens():
 	return render_template("queens.html", **templateData)
 
 
+
+#Edit the points manually
+
 @app.route('/admin')
 def editpoints():
 
 	users = User.query.order_by(User.group).order_by(User.points)
-
+	queens = Queen.query.order_by(Queen.name).first()
 
 	templateData = {
 
 	'users' : users,
+	'queens' : queens
 
 	}
 
 	return render_template("editpoints.html", **templateData)
-
-@app.route('/changepoints/<id>', methods=['POST'])
-def changepoints(id):
-
-	user = User.query.filter_by(id=id).first()
-
-	points = request.form.get('points')
-
-	user.points = points
-
-	return redirect('/')
-
 
 
 #Form to add new users and queens
@@ -91,6 +85,25 @@ def adduser():
 
 	return render_template("adduser.html", **templateData)
 
+
+#Edit Existing User
+@app.route('/edituser/<id>')
+def edituser(id):
+
+	user = User.query.filter_by(id=id).first()
+
+	templateData = {
+	'user' : user
+	}
+
+	return render_template("edituser.html", **templateData)
+
+
+# Probably don't need to edit under here ###
+
+#-------POST ROUTES--------#
+
+
 #Add Owner to Queen
 @app.route('/addowner/<id>', methods=['GET', 'POST'])
 def addowner(id):
@@ -106,6 +119,7 @@ def addowner(id):
 	return redirect('/queens')
 
 
+
 #Remove Owner
 @app.route('/clearowner/<id>', methods=['GET', 'POST'])
 def removeowner(id):
@@ -117,6 +131,20 @@ def removeowner(id):
 	return redirect('/queens')
 
 
+#Post route to edit points
+
+@app.route('/changepoints/<id>', methods=['POST'])
+def changepoints(id):
+
+	user = User.query.filter_by(id=id).first()
+
+	points = request.form.get('points')
+
+	user.points = points
+
+	return redirect('/')
+
+
 #CLONE A QUEEN
 @app.route('/duplicate/<id>')
 def duplicate(id):
@@ -124,7 +152,6 @@ def duplicate(id):
 	
 	queen = Queen.query.filter_by(id=id).first()
 
-	
 
 	n = queen.name
 	d = queen.description
@@ -165,6 +192,26 @@ def newuser():
 	return render_template("adduser.html", **templateData)
 
 
+#Edit Existing User Data
+@app.route('/updateuser/<id>', methods=['POST'])
+def updateuser(id):
+
+	u = request.form.get('username')
+	p = request.form.get('password')
+	e = request.form.get('email')
+	g = request.form.get('group')
+
+	user = User.query.filter_by(id=id).first()
+
+	user.username = u
+	user.password = p
+	user.email = e
+	user.group = g
+	db.session.commit()
+
+	return redirect('/')
+
+
 #Post new Queen data
 @app.route('/newqueen', methods=['POST'])
 def newqueen():
@@ -197,7 +244,6 @@ def clearall():
  		db.session.commit()
 
 	return redirect('/')
-
 
 
 

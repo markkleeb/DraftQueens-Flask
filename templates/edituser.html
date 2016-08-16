@@ -1,0 +1,34 @@
+{% extends "layout/main.html" %}
+{% block body %}
+<br>
+<br>
+
+<h1>Edit User</h1>
+<form method='POST' action='/updateuser/{{user.id}}'>
+
+	ID : {{user.id}}
+	<br>
+	<br>
+	Username: <input type="text" name="username" value="{{user.username}}">
+	<br>
+	<br>
+	Password: <input type="text" name="password" value = "{{user.password}}">
+	<br>
+	<br>
+	Email: <input type="text" name="email" value = "{{user.email}}">
+	<br>
+	<br>
+	Group: <input type="text" name ="group" value = "{{user.group}}">
+	<br>
+	<br>
+	<input type="submit" value="Edit User">
+
+
+</form>
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}
