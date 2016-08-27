@@ -141,6 +141,8 @@ def addowner(id):
 	
 		queen.drafted = True
 		user.queens.append(queen)
+
+		db.session.commit()
 	
 		return redirect('/queens')
 	
@@ -159,6 +161,8 @@ def removeowner(id):
 
 	queen.owners = ''
 
+	db.session.commit()
+
 	return redirect('/queens')
 
 
@@ -173,7 +177,11 @@ def changepoints(id):
 
 	user.points = points
 
-	return redirect('/')
+	db.session.commit()
+
+	return redirect('/adduser')
+
+
 
 
 #CLONE A QUEEN
