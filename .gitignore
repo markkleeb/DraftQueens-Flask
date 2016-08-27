@@ -1,0 +1,8 @@
+venv
+*.pyc
+build
+bin
+*.DS_*
+*.egg
+*.egg-info
+.env

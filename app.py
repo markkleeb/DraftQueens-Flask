@@ -9,24 +9,32 @@ from flask_googlelogin import GoogleLogin
 from flask_oauth import OAuth
 
 DEBUG = True
-SECRET_KEY = 'development key'
 
-
+# create our little application :)
 app = Flask(__name__)
+app.config.from_object(__name__)
+
+# Load default config and override config from an environment variable
+app.config.update(dict(
+    #DATABASE=os.path.join(app.root_path, 'flaskr.db'),
+    SECRET_KEY='development key',
+    USERNAME='admin',
+    PASSWORD='default'
+))
+app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 app.debug = DEBUG
-app.secret_key = SECRET_KEY
-oauth = OAuth()
+
 
 #Configure SQLAlchemy Database
 db.create_all()
-#mongo = PyMongo(app)
+
 
 #----------------GET ROUTES ----------------#####
 
-#Index Page (not yet set up) - Scoreboard
+#Index Page  - Scoreboard
 @app.route('/')
 def index():
-   users = User.query.order_by(User.group).order_by(User.points)
+   users = User.query.order_by(User.group).order_by(-User.points)
    queens = Queen.query.order_by(Queen.name)
 
    templateData= {
@@ -35,6 +43,18 @@ def index():
    }
    return render_template("index.html", **templateData)
  
+
+@app.route('/<username>')
+def user(username):
+
+	user = User.query.filter_by(username=username).first()
+
+	templateData={
+	'user': user
+	}
+
+
+	return render_template("user.html", **templateData)
 
 #List of 180 queens and all options for queens
 
@@ -66,7 +86,7 @@ def editpoints():
 
 	}
 
-	return render_template("editpoints.html", **templateData)
+	return render_template("adduser.html", **templateData)
 
 
 #Form to add new users and queens
@@ -86,6 +106,7 @@ def adduser():
 	return render_template("adduser.html", **templateData)
 
 
+
 #Edit Existing User
 @app.route('/edituser/<id>')
 def edituser(id):
@@ -99,6 +120,10 @@ def edituser(id):
 	return render_template("edituser.html", **templateData)
 
 
+
+
+
+
 # Probably don't need to edit under here ###
 
 #-------POST ROUTES--------#
@@ -110,13 +135,19 @@ def addowner(id):
 
 	
 	queen = Queen.query.filter_by(id=id).first()
-	queen.drafted = True
-
-	user = User.query.filter_by(username=request.form.get('owner')).first()
-
-	user.queens.append(queen)
 	
-	return redirect('/queens')
+	try:
+		user = User.query.filter_by(username=request.form.get('owner')).first()
+	
+		queen.drafted = True
+		user.queens.append(queen)
+	
+		return redirect('/queens')
+	
+	except:
+		return "User does not exist"
+
+	
 
 
 

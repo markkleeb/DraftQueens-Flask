@@ -20,7 +20,7 @@
 <h2>Group 1</h2>
 {% for u in users %}
 {% if u.group == 1 %}
-<h3>{{u.username}} - {{u.points}} </h3>
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}} </h3>
 {%endif%}
 {%endfor%}
 <br>
@@ -30,7 +30,7 @@
 <h2>Group 2</h2>
 {% for u in users %}
 {% if u.group == 2 %}
-<h3>{{u.username}} - {{u.points}} </h3>
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}} </h3>
 {%endif%}
 {%endfor%}
 <br>
@@ -40,7 +40,7 @@
 <h2>Group 3</h2>
 {% for u in users %}
 {% if u.group == 3 %}
-<h3>{{u.username}} - {{u.points}}</h3>
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}}</h3>
 {%endif%}
 {%endfor%}
 <br>
@@ -50,7 +50,7 @@
 <h2>Group 4</h2>
 {% for u in users %}
 {% if u.group == 4 %}
-<h3>{{u.username}} - {{u.points}}</h3>
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}}</h3>
 {%endif%}
 {%endfor%}
 <br>
@@ -60,7 +60,7 @@
 <h2>Group 5</h2>
 {% for u in users %}
 {% if u.group == 5 %}
-<h3>{{u.username}} - {{u.points}}</h3>
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}}</h3>
 {%endif%}
 {%endfor%}
 <br>
@@ -70,14 +70,24 @@
 <h2>Group 6</h2>
 {% for u in users %}
 {% if u.group == 6 %}
-<h3>{{u.username}} - {{u.points}}</h3>
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}}</h3>
 {%endif%}
 {%endfor%}
 <br>
 <br>
 <br>
 </div>
-
+<div class="group">
+<h2>Group 7</h2>
+{% for u in users %}
+{% if u.group == 7 %}
+<h3><a href="/{{u.username}}">{{u.username}}</a> - {{u.points}}</h3>
+{%endif%}
+{%endfor%}
+<br>
+<br>
+<br>
+</div>
 
 
 {% endblock %}

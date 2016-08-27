@@ -25,6 +25,46 @@
 
 
 </form>
+Points: {{user.points}}
+<br>
+<br>
+<form method='POST' action="/changepoints/{{user.id}}">
+ENTER NEW POINTS: <input type="text" name="points">
+<br>
+<input type="submit" value="Enter">
+</form>
+<form method="POST" action='/bench/'>
+{%for q in user.queens %}
+<div class="user">
+<h4>{{q.name}}</h4>
+<br>
+{% if q.kickedoff %}
+<img src = "{{q.img}}" width=300 opacity=0.3 />
+{% else %}
+<img src = "{{q.img}}" width=300/>
+{%endif%}
+<br>
+{% if q.active %}
+IN PLAY
+{% else %}
+BENCH
+{% endif %}
+
+<select name="team">
+<option value="active">ACTIVE</option>
+<option value="bench">BENCH</option>
+</select>	
+
+
+
+<br>
+</div>
+
+
+{%endfor%}
+<br>
+<input type="submit" value="SAVE">
+</form>
 <br>
 <br>
 <br>

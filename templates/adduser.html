@@ -2,7 +2,8 @@
 {% block body %}
 <br>
 <br>
-
+<div class="form">
+<div class="group">
 <h1>Add User</h1>
 <form method='POST' action='/newuser'>
 
@@ -19,9 +20,10 @@
 
 
 </form>
+</div>
 <br>
 
-
+<div class="group">
 <h1>Add Queen</h1>
 <form method='POST' action='/newqueen'>
 
@@ -39,8 +41,12 @@
 
 
 </form>
-
+</div>
+</div>
+<div class="usermap">
+<br>
 {% for u in users %}
+<div class="user">
 <br>
 <h2>{{u.username}}</h2>
 <b>Email:</b> {{u.email}}
@@ -50,15 +56,20 @@
 <b>Points:</b> {{u.points}}
 <br>
 <b>Queens:</b> 
+<br>
 {% for q in u.queens %}
-- {{q.name}} 
+<div class="user">
+<img src="{{q.img}}" width=50> 
+</div>
 {%endfor%}
 <br>
 <a href="/edituser/{{u.id}}">Edit User</a>
 <br>
 <a href="/clear/{{u.id}}">Delete User</a>
 <br>
+</div>
 {%endfor%}
+</div>
 <br>
 
 {% endblock %}

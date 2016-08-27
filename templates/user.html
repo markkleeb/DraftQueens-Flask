@@ -1,0 +1,37 @@
+{% extends "layout/main.html" %}
+{% block body %}
+<br>
+<br>
+
+<h1>{{user.username}}</h1>
+
+
+	Email: {{user.email}}
+	<br>
+	<br>
+	Group: {{user.group}}
+	<br>
+	<br>
+	Points: {{user.points}}
+	<br>
+	<br>
+<h2>Queens:</h2>
+{% for q in user.queens %}
+<div class="user">
+<h4>{{q.name}}</h4>
+<img src="{{q.img}}" width=150>
+<br>
+{%if q.active %}
+ACTIVE
+{%else%}
+BENCH
+{%endif%}
+</div>
+{%endfor%}
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

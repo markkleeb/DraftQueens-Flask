@@ -7,16 +7,20 @@
 
 {% for q in queens %}
 {% if q.drafted == 0 %}
+<div class="group">
 <h2>{{q.name}}</h2>
 <img src="{{q.img}}" width=150>
 <br>
-
+{% for o in q.owners %}
+	Owner: {{o.username}}
+	{%endfor%}
 <form method="POST" action="/addowner/{{q.id}}">
-FREE AGENT! New Owner: <input type="text" name="owner">
+FREE AGENT!<br> New Owner:<br> <input type="text" name="owner">
 </form>
 
 <a href="/delete/{{q.id}}">Delete Queen</a>
 <!--<a href='/duplicate/{{q.id}}'>CLONE THIS QUEEN</a>-->
+</div>
 {% endif%}
 {%endfor%}
 <br>
@@ -24,6 +28,7 @@ FREE AGENT! New Owner: <input type="text" name="owner">
 <h1>OWNED:</h1>
 {% for q in queens %}
 {% if q.drafted == 1 %}
+<div class="group">
 <h2>{{q.name}}</h2>
 <img src="{{q.img}}" width=150>
 <br>
@@ -36,6 +41,7 @@ FREE AGENT! New Owner: <input type="text" name="owner">
 
 <a href="/delete/{{q.id}}">Delete Queen</a>
 <!--<a href='/duplicate/{{q.id}}'>CLONE THIS QUEEN</a>-->
+</div>
 {%endif%}
 
 {%endfor%}

@@ -7,7 +7,27 @@ body{
 .group{
 
 
-	float:left;
+	display: inline-block;
 	margin: 10px 20px;
 	text-align: right;
+}
+
+.usermap{
+
+	width: 90%;
+	margin: 5px auto;
+	text-align: center;
+
+}
+
+.user{
+
+	display: inline-block;
+	text-align: center;
+	border: solid 1px black;
+}
+
+.form{
+
+	vertical-align: center;
 }
